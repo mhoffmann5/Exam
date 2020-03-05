@@ -1,6 +1,6 @@
 ---
 title: "midterm"
-author: "Karl Rohe"
+author: "Michael Hoffmann"
 output: md_document
 ---
   
@@ -81,7 +81,34 @@ flights_1 %>% mutate(avgSpeed = distance/air_timeHours)%>%
 To examine if there is anything in the plane data that correlates with average speed, use ```geom_boxplot``` with average speed of the plane (in previous question) on the y-axis and ```planes$engine``` on the x-axis.  Do the same for ```planes$engines``` and ```planes$type```.  
 
 ```{r}
-# put answer here
+flights_1 %>% mutate(avgSpeed = distance/air_timeHours)%>%
+  group_by(tailnum)%>%
+  summarize(avgAllPlanes = mean(avgSpeed, na.rm=TRUE))%>%
+  left_join(planes, "tailnum") %>%
+  ggplot(aes(engine,avgAllPlanes))+
+  geom_boxplot()
+
+
+
+#flights_1 %>% mutate(avgSpeed = distance/air_timeHours)%>%
+  #group_by(tailnum)%>%
+  #summarize(avgAllPlanes = mean(avgSpeed, na.rm=TRUE))%>%
+  #left_join(planes, "tailnum") %>%
+  #ggplot(aes(engines, avgAllPlanes), na.rm) +
+  #geom_boxplot()
+
+
+#flights_1 %>% mutate(avgSpeed = distance/air_timeHours)%>%
+  #group_by(tailnum)%>%
+  #summarize(avgAllPlanes = mean(avgSpeed, na.rm=TRUE))%>%
+  #left_join(planes, "tailnum") %>%
+  #ggplot(aes(type, avgAllPlanes)) +
+  #geom_boxplot
+
+
+
+
+
 ```
 
 PLEASE REMEMBER TO ALSO COMMIT AND PUSH YOUR FIGURES!!!
